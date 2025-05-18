@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GalaxyX - User Dashboard</title>
+  <link rel="stylesheet" href="../css/user-dashboard.css" />
+  <link rel="icon" href="../img/pls7.png">
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">GALAXYX</div>
+    <nav>
+      <a href="after-login.html">Home</a>
+      <a href="../php/trip.php">Trips</a>
+      <a href="../php/store.php">Store</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <!-- User Info Section -->
+  <section class="dashboard-section">
+    <h1>Welcome, <span id="user-name">User</span></h1>
+
+    <!-- Display user information -->
+    <div class="user-info">
+      <p><strong>Full Name:</strong> <span id="name">Loading...</span></p>
+      <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+      <p><strong>Address:</strong> <span id="address">Loading...</span></p>
+    </div>
+    <h2>Update Your Information</h2>
+    <form action="../php/user-dashboard.php" method="POST" class="update-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name-input" name="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email-input" name="email" required />
+
+      <label for="address">Shipping Address</label>
+      <textarea id="address-input" name="address" rows="3" required></textarea>
+
+
+
+      <button type="submit" class="btn">Update Information</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 GalaxyX. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Load user data from PHP
+    fetch('../php/user-dashboard.php')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('user-name').textContent = data.name;
+        document.getElementById('name').textContent = data.name;
+        document.getElementById('email').textContent = data.email;
+        document.getElementById('address').textContent = data.address;
+
+        document.getElementById('name-input').value = data.name;
+        document.getElementById('email-input').value = data.email;
+        document.getElementById('address-input').value = data.address;
+      });
+  </script>
+</body>
+</html>
